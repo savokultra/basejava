@@ -10,6 +10,7 @@ public class ArrayStorage {
     void save(Resume r) {
     }
 
+    //проверить совпадение имени на входе и в массиве при совпадении выдать имя, если нет вывести: Нет "uuid" в массиве
     Resume get(String uuid) {
         return null;
     }
