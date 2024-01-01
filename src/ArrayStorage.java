@@ -5,18 +5,17 @@ import java.util.Arrays;
  */
 public class ArrayStorage {
     Resume[] storage = new Resume[10000];
-    int cell;
+    int fillCellCount;
 
     void clear() {
         Arrays.fill(storage, null);
-        cell = 0;
+        fillCellCount = 0;
     }
 
-    void save(Resume r) {
-        storage[cell++] = r;
+    void save(Resume resume) {
+        storage[fillCellCount++] = resume;
     }
 
-    //проверить совпадение имени на входе и в массиве при совпадении выдать имя, если нет вывести: Нет "uuid" в массиве
     Resume get(String uuid) {
         int i;
         for (i = 0; i < storage.length; i++) {
@@ -27,24 +26,44 @@ public class ArrayStorage {
             if (storage[i].toString() == uuid) {
                 break;
             }
-            /*System.out.println("Моё uuid = " + uuid);
-            System.out.println("Моё resume = " + storage[i]);
-            System.out.println("Моё " + storage[i].toString() == uuid);*/
         }
         return storage[i];
     }
 
     void delete(String uuid) {
+        int i;
+        Resume temp;
+        for (i = 0; i <= fillCellCount; i++) {
+            if (storage[i] == null) {
+                System.out.println("Совпадений с " + uuid + " в массиве не обнаружено");
+                break;
+            }
+            if (storage[i].toString() == uuid) {
+                storage[i] = null;
+                fillCellCount--;
+            } else {
+                System.out.println("Совпадений с " + uuid + " в массиве не обнаружено");
+                break;
+            }
+            if (storage[i + 1] != null) {
+                do {
+                    temp = storage[i + 1];
+                    storage[i] = temp;
+                    storage[i + 1] = null;
+                    i++;
+                } while (storage[i + 1] != null);
+            }
+        }
     }
 
     /**
      * @return array, contains only Resumes in storage (without null)
      */
     Resume[] getAll() {
-        return new Resume[0];
+        return Arrays.copyOf(storage, fillCellCount);
     }
 
     int size() {
-        return cell;
+        return fillCellCount;
     }
 }
