@@ -34,24 +34,19 @@ public class ArrayStorage {
         int i;
         Resume temp;
         for (i = 0; i <= fillCellCount; i++) {
-            if (storage[i] == null) {
-                System.out.println("Совпадений с " + uuid + " в массиве не обнаружено");
-                break;
-            }
             if (storage[i].toString() == uuid) {
                 storage[i] = null;
                 fillCellCount--;
+                if (storage[i + 1] != null) {
+                    do {
+                        temp = storage[i + 1];
+                        storage[i] = temp;
+                        storage[i + 1] = null;
+                        i++;
+                    } while (storage[i + 1] != null);
+                }
             } else {
                 System.out.println("Совпадений с " + uuid + " в массиве не обнаружено");
-                break;
-            }
-            if (storage[i + 1] != null) {
-                do {
-                    temp = storage[i + 1];
-                    storage[i] = temp;
-                    storage[i + 1] = null;
-                    i++;
-                } while (storage[i + 1] != null);
             }
         }
     }
