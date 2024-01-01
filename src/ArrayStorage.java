@@ -23,7 +23,7 @@ public class ArrayStorage {
                 System.out.println("Совпадений с " + uuid + " в массиве не обнаружено");
                 break;
             }
-            if (storage[cell].toString() == uuid) {
+            if (storage[cell].toString().equals(uuid)) {
                 break;
             }
         }
@@ -33,7 +33,7 @@ public class ArrayStorage {
     void delete(String uuid) {
         Resume temp;
         for (int i = 0; i <= fillCellCount; i++) {
-            if (storage[i].toString() == uuid) {
+            if (storage[i].toString().equals(uuid)) {
                 storage[i] = null;
                 fillCellCount--;
                 if (storage[i + 1] != null) {
