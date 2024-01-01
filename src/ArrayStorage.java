@@ -17,23 +17,22 @@ public class ArrayStorage {
     }
 
     Resume get(String uuid) {
-        int i;
-        for (i = 0; i < storage.length; i++) {
-            if (storage[i] == null) {
+        int cell;
+        for (cell = 0; cell < storage.length; cell++) {
+            if (storage[cell] == null) {
                 System.out.println("Совпадений с " + uuid + " в массиве не обнаружено");
                 break;
             }
-            if (storage[i].toString() == uuid) {
+            if (storage[cell].toString() == uuid) {
                 break;
             }
         }
-        return storage[i];
+        return storage[cell];
     }
 
     void delete(String uuid) {
-        int i;
         Resume temp;
-        for (i = 0; i <= fillCellCount; i++) {
+        for (int i = 0; i <= fillCellCount; i++) {
             if (storage[i].toString() == uuid) {
                 storage[i] = null;
                 fillCellCount--;
