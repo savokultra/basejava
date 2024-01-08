@@ -18,7 +18,7 @@ public class ArrayStorage {
 
     Resume get(String uuid) {
         int cell;
-        for (cell = 0; cell < storage.length; cell++) {
+        for (cell = 0; cell <= countResumes; cell++) {
             if (storage[cell] == null) {
                 System.out.println("Совпадений с " + uuid + " в массиве не обнаружено");
                 break;
