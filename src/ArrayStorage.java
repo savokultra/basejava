@@ -34,16 +34,9 @@ public class ArrayStorage {
         Resume temp;
         for (int i = 0; i <= countResumes; i++) {
             if (storage[i].toString().equals(uuid)) {
-                storage[i] = null;
                 countResumes--;
-                if (storage[i + 1] != null) {
-                    do {
-                        temp = storage[i + 1];
-                        storage[i] = temp;
-                        storage[i + 1] = null;
-                        i++;
-                    } while (storage[i + 1] != null);
-                }
+                storage[i] = storage[countResumes];
+                break;
             } else {
                 System.out.println("Совпадений с " + uuid + " в массиве не обнаружено");
             }
