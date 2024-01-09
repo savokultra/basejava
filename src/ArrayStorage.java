@@ -17,10 +17,9 @@ public class ArrayStorage {
     }
 
     Resume get(String uuid) {
-        int cell;
-        for (cell = 0; cell < countResumes; cell++) {
-            if (storage[cell].toString().equals(uuid)) {
-                return storage[cell];
+        for (int i = 0; i < countResumes; i++) {
+            if (storage[i].toString().equals(uuid)) {
+                return storage[i];
             }
         }
         System.out.println("Совпадений с " + uuid + " в массиве не обнаружено");
