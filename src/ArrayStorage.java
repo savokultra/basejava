@@ -27,15 +27,15 @@ public class ArrayStorage {
     }
 
     void delete(String uuid) {
-        for (int i = 0; i <= countResumes; i++) {
+        for (int i = 0; i < countResumes; i++) {
             if (storage[i].toString().equals(uuid)) {
                 countResumes--;
                 storage[i] = storage[countResumes];
+                storage[countResumes] = null;
                 break;
-            } else {
-                System.out.println("Совпадений с " + uuid + " в массиве не обнаружено");
             }
         }
+        System.out.println("Совпадений с " + uuid + " в массиве не обнаружено");
     }
 
     /**
