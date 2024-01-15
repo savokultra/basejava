@@ -14,6 +14,11 @@ public class ArrayStorage {
 
     public void update(Resume r) {
         // TODO check if resume present
+        for (int i = 0; i < countResumes; i++) {
+            if (storage[i].equals(r)) {
+                System.out.println("Обновлено резюме");
+            }
+        }
         System.out.println("ERROR");
     }
     
