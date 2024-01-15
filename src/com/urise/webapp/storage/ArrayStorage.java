@@ -8,18 +8,18 @@ import java.util.Arrays;
  * Array based storage for Resumes
  */
 public class ArrayStorage {
-    Resume[] storage = new Resume[10000];
-    int countResumes;
+    private Resume[] storage = new Resume[10000];
+    private int countResumes;
 
     public void clear() {
         Arrays.fill(storage, 0, countResumes , null);
         countResumes = 0;
     }
 
-    public void update(Resume r) {
+    public void update(Resume resume) {
         // TODO check if resume present
         for (int i = 0; i < countResumes; i++) {
-            if (storage[i].equals(r)) {
+            if (storage[i].equals(resume)) {
                 System.out.println("Обновлено резюме");
             }
         }
