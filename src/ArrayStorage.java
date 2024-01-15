@@ -12,7 +12,13 @@ public class ArrayStorage {
         countResumes = 0;
     }
 
+    public void update(Resume r) {
+        // TODO check if resume present
+        System.out.println("ERROR");
+    }
+    
     void save(Resume resume) {
+        //TODO check if resume not present
         storage[countResumes++] = resume;
     }
 
@@ -27,6 +33,7 @@ public class ArrayStorage {
     }
 
     void delete(String uuid) {
+        // TODO check if resume present
         for (int i = 0; i < countResumes; i++) {
             if (storage[i].toString().equals(uuid)) {
                 countResumes--;
