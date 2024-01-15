@@ -20,15 +20,26 @@ public class ArrayStorage {
         // TODO check if resume present
         for (int i = 0; i < countResumes; i++) {
             if (storage[i].equals(resume)) {
-                System.out.println("Обновлено резюме");
+                System.out.println("Обновлено резюме: " + resume);
+            } else {
+                System.out.println("Резюме " + resume + " не обнаружено");
             }
         }
-        System.out.println("ERROR");
     }
     
     public void save(Resume resume) {
+        if (countResumes < storage.length) {
+            for (int i = 0; i < countResumes; i++) {
+                /*if (!storage[i].equals(resume)) {
+                    storage[countResumes++] = resume;
+                    System.out.println("Создано резюме: " + resume);
+                } else {
+                    System.out.println("Резюме " + resume + " не обнаружено");
+                }*/
+            }
+        }
         //TODO check if resume not present
-        storage[countResumes++] = resume;
+
     }
 
     public Resume get(String uuid) {
