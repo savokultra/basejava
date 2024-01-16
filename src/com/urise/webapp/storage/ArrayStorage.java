@@ -9,6 +9,7 @@ import java.util.Arrays;
  */
 public class ArrayStorage {
     private Resume[] storage = new Resume[10000];
+
     private int countResumes;
 
     public void clear() {
@@ -28,18 +29,23 @@ public class ArrayStorage {
     }
     
     public void save(Resume resume) {
-        if (countResumes < storage.length) {
-            for (int i = 0; i < countResumes; i++) {
-                /*if (!storage[i].equals(resume)) {
-                    storage[countResumes++] = resume;
-                    System.out.println("Создано резюме: " + resume);
-                } else {
-                    System.out.println("Резюме " + resume + " не обнаружено");
-                }*/
-            }
+        if (countResumes >= storage.length) {
+            return;
         }
+        if (countResumes == 0) {
+            storage[countResumes++] = resume;
+            return;
+        } else {
+            for (int i = 0; i < countResumes; i++) {
+                if (storage[i].equals(resume)) {
+                    System.out.println("Резюме " + resume + " уже существует");
+                    return;
+                }
+            }
+            storage[countResumes++] = resume;
+        }
+        System.out.println("Моё SAVE");
         //TODO check if resume not present
-
     }
 
     public Resume get(String uuid) {
