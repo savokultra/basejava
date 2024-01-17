@@ -11,22 +11,6 @@ public class ArrayStorage {
     private final Resume[] storage = new Resume[10000];
     private int countResumes;
 
-    public void clear() {
-        Arrays.fill(storage, 0, countResumes , null);
-        countResumes = 0;
-    }
-
-    public void update(Resume resume) {
-        for (int i = 0; i < countResumes; i++) {
-            if (checkResume(i, resume)) {
-                System.out.println("Обновлено резюме: " + resume);
-                break;
-            } else {
-                System.out.println("Резюме update " + resume + " не обнаружено");
-            }
-        }
-    }
-    
     public void save(Resume resume) {
         if (countResumes >= storage.length) {
             return;
@@ -52,6 +36,25 @@ public class ArrayStorage {
         return null;
     }
 
+    public int size() {
+        return countResumes;
+    }
+
+    public Resume[] getAll() {
+        return Arrays.copyOf(storage, countResumes);
+    }
+
+    public void update(Resume resume) {
+        for (int i = 0; i < countResumes; i++) {
+            if (checkResume(i, resume)) {
+                System.out.println("Обновлено резюме: " + resume);
+                break;
+            } else {
+                System.out.println("Резюме update " + resume + " не обнаружено");
+            }
+        }
+    }
+
     public void delete(String uuid) {
         for (int i = 0; i < countResumes; i++) {
             if (checkUuid(i, uuid)) {
@@ -65,16 +68,15 @@ public class ArrayStorage {
         System.out.println("Нельзя удалить " + uuid + " т.к. uuid не обнаружен");
     }
 
+    public void clear() {
+        Arrays.fill(storage, 0, countResumes , null);
+        countResumes = 0;
+    }
+
     /**
      * @return array, contains only Resumes in storage (without null)
      */
-    public Resume[] getAll() {
-        return Arrays.copyOf(storage, countResumes);
-    }
 
-    public int size() {
-        return countResumes;
-    }
 
     private boolean checkResume(int i, Resume resume) {
         return storage[i].equals(resume);
