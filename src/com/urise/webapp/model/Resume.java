@@ -20,4 +20,18 @@ public class Resume {
     public String toString() {
         return uuid;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == this) {
+            return true;
+        }
+
+        if (obj == null || obj.getClass() != this.getClass()) {
+            return false;
+        }
+
+        Resume c = (Resume) obj;
+        return uuid == c.uuid;
+    }
 }
