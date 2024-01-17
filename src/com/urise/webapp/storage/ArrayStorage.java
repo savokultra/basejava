@@ -21,8 +21,9 @@ public class ArrayStorage {
         for (int i = 0; i < countResumes; i++) {
             if (checkResume(i, resume)) {
                 System.out.println("Обновлено резюме: " + resume);
+                break;
             } else {
-                System.out.println("Резюме " + resume + " не обнаружено");
+                System.out.println("Резюме update " + resume + " не обнаружено");
             }
         }
     }
@@ -48,7 +49,7 @@ public class ArrayStorage {
                 return storage[i];
             }
         }
-        System.out.println("Резюме " + uuid + " не обнаружено");
+        System.out.println("Резюме get " + uuid + " не обнаружено");
         return null;
     }
 
@@ -58,10 +59,11 @@ public class ArrayStorage {
                 countResumes--;
                 storage[i] = storage[countResumes];
                 storage[countResumes] = null;
-                break;
+                System.out.println("Удален " + uuid);
+                return;
             }
         }
-        System.out.println("Нельзя удалить " + uuid + " т.к. резюме не обнаружено");
+        System.out.println("Нельзя удалить " + uuid + " т.к. uuid не обнаружен");
     }
 
     /**
