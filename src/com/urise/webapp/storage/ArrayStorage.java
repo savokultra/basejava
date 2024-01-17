@@ -9,7 +9,6 @@ import java.util.Arrays;
  */
 public class ArrayStorage {
     private final Resume[] storage = new Resume[10000];
-
     private int countResumes;
 
     public void clear() {
