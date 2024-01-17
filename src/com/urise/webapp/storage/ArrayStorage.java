@@ -8,7 +8,7 @@ import java.util.Arrays;
  * Array based storage for Resumes
  */
 public class ArrayStorage {
-    private Resume[] storage = new Resume[10000];
+    private final Resume[] storage = new Resume[10000];
 
     private int countResumes;
 
@@ -18,9 +18,8 @@ public class ArrayStorage {
     }
 
     public void update(Resume resume) {
-        // TODO check if resume present
         for (int i = 0; i < countResumes; i++) {
-            if (storage[i].equals(resume)) {
+            if (checkResume(i, resume)) {
                 System.out.println("Обновлено резюме: " + resume);
             } else {
                 System.out.println("Резюме " + resume + " не обнаружено");
@@ -32,43 +31,37 @@ public class ArrayStorage {
         if (countResumes >= storage.length) {
             return;
         }
-        if (countResumes == 0) {
-            storage[countResumes++] = resume;
-            return;
-        } else {
+        if (countResumes != 0) {
             for (int i = 0; i < countResumes; i++) {
-                if (storage[i].equals(resume)) {
+                if (checkResume(i, resume)) {
                     System.out.println("Резюме " + resume + " уже существует");
                     return;
                 }
             }
-            storage[countResumes++] = resume;
         }
-        System.out.println("Моё SAVE");
-        //TODO check if resume not present
+        storage[countResumes++] = resume;
     }
 
     public Resume get(String uuid) {
         for (int i = 0; i < countResumes; i++) {
-            if (storage[i].toString().equals(uuid)) {
+            if (checkUuid(i, uuid)) {
                 return storage[i];
             }
         }
-        System.out.println("Совпадений с " + uuid + " в массиве не обнаружено");
+        System.out.println("Резюме " + uuid + " не обнаружено");
         return null;
     }
 
     public void delete(String uuid) {
-        // TODO check if resume present
         for (int i = 0; i < countResumes; i++) {
-            if (storage[i].toString().equals(uuid)) {
+            if (checkUuid(i, uuid)) {
                 countResumes--;
                 storage[i] = storage[countResumes];
                 storage[countResumes] = null;
                 break;
             }
         }
-        System.out.println("Совпадений с " + uuid + " в массиве не обнаружено");
+        System.out.println("Нельзя удалить " + uuid + " т.к. резюме не обнаружено");
     }
 
     /**
@@ -80,5 +73,13 @@ public class ArrayStorage {
 
     public int size() {
         return countResumes;
+    }
+
+    private boolean checkResume(int i, Resume resume) {
+        return storage[i].equals(resume);
+    }
+
+    private boolean checkUuid(int i, String uuid) {
+        return storage[i].toString().equals(uuid);
     }
 }
