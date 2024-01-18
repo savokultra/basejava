@@ -1,12 +1,8 @@
 package com.urise.webapp.storage;
 
 import com.urise.webapp.model.Resume;
-
 import java.util.Arrays;
 
-/**
- * Array based storage for Resumes
- */
 public class ArrayStorage {
     private final Resume[] storage = new Resume[10000];
     private int countResumes;
@@ -73,16 +69,11 @@ public class ArrayStorage {
         countResumes = 0;
     }
 
-    /**
-     * @return array, contains only Resumes in storage (without null)
-     */
-
-
-    private boolean checkResume(int i, Resume resume) {
-        return storage[i].equals(resume);
-    }
-
     private boolean checkUuid(int i, String uuid) {
         return storage[i].toString().equals(uuid);
     }
+    
+    private boolean checkResume(int i, Resume resume) {
+        return storage[i].equals(resume);
+    }   
 }
