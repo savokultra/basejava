@@ -41,16 +41,14 @@ public class ArrayStorage {
     }
 
     public void delete(String uuid) {
-        for (int i = 0; i < countResumes; i++) {
-            if (getIndex(uuid) >= 0) {
-                countResumes--;
-                storage[i] = storage[countResumes];
-                storage[countResumes] = null;
-                System.out.println("Удален " + uuid);
-                return;
-            }
+        if (getIndex(uuid) >= 0) {
+            countResumes--;
+            storage[getIndex(uuid)] = storage[countResumes];
+            storage[countResumes] = null;
+            System.out.println("Удален " + uuid);
+        } else {
+            System.out.println("Нельзя удалить " + uuid + " т.к. uuid не обнаружен");
         }
-        System.out.println("Нельзя удалить " + uuid + " т.к. uuid не обнаружен");
     }
 
     public void clear() {
