@@ -24,7 +24,7 @@ public class ArrayStorage {
         storage[countResumes++] = resume;
     }
 
-    public Resume get(String uuid) {
+    /*public Resume get(String uuid) {
         for (int i = 0; i < countResumes; i++) {
             if (checkUuid(i, uuid)) {
                 return storage[i];
@@ -32,6 +32,10 @@ public class ArrayStorage {
         }
         System.out.println("Резюме get " + uuid + " не обнаружено");
         return null;
+    }*/
+
+    public Object get(String uuid) {
+        return getIndex(uuid) >= 0 ? storage[getIndex(uuid)] : "Резюме get " + uuid + " не обнаружено";
     }
 
     public int size() {
@@ -77,5 +81,14 @@ public class ArrayStorage {
     
     private boolean checkResume(int i, Resume resume) {
         return storage[i].equals(resume);
-    }   
+    }
+
+    int getIndex(String uuid) {
+        for (int i = 0; i < countResumes; i++) {
+            if (storage[i].toString().equals(uuid)) {
+                return i;
+            }
+        }
+        return - 1;
+    }
 }
