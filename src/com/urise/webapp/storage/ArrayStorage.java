@@ -15,7 +15,7 @@ public class ArrayStorage {
         }
         if (countResumes != 0) {
             for (int i = 0; i < countResumes; i++) {
-                if (checkResume(i, resume)) {
+                if (getIndex(resume.toString()) >= 0) {
                     System.out.println("Резюме " + resume + " уже существует");
                     return;
                 }
@@ -48,7 +48,7 @@ public class ArrayStorage {
 
     public void update(Resume resume) {
         for (int i = 0; i < countResumes; i++) {
-            if (checkResume(i, resume)) {
+            if (getIndex(resume.toString()) >= 0) {
                 System.out.println("Обновлено резюме: " + resume);
                 break;
             } else {
@@ -75,13 +75,13 @@ public class ArrayStorage {
         countResumes = 0;
     }
 
-    private boolean checkUuid(int i, String uuid) {
-        return storage[i].toString().equals(uuid);
-    }
+//    private boolean checkUuid(int i, String uuid) {
+//        return storage[i].toString().equals(uuid);
+//    }
     
-    private boolean checkResume(int i, Resume resume) {
-        return storage[i].equals(resume);
-    }
+//    private boolean checkResume(int i, Resume resume) {
+//        return storage[i].equals(resume);
+//    }
 
     int getIndex(String uuid) {
         for (int i = 0; i < countResumes; i++) {
