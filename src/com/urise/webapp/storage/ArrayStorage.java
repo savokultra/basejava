@@ -59,7 +59,7 @@ public class ArrayStorage {
 
     public void delete(String uuid) {
         for (int i = 0; i < countResumes; i++) {
-            if (checkUuid(i, uuid)) {
+            if (getIndex(uuid) >= 0) {
                 countResumes--;
                 storage[i] = storage[countResumes];
                 storage[countResumes] = null;
