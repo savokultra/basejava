@@ -11,28 +11,13 @@ public class ArrayStorage {
 
     public void save(Resume resume) {
         if (countResumes >= storage.length) {
-            return;
+            System.out.println("Лимит резюме достигнут");
+        } else if (getIndex(resume.toString()) > 0) {
+            System.out.println("Резюме " + resume + " уже существует");
+        } else {
+            storage[countResumes++] = resume;
         }
-        if (countResumes != 0) {
-            for (int i = 0; i < countResumes; i++) {
-                if (getIndex(resume.toString()) >= 0) {
-                    System.out.println("Резюме " + resume + " уже существует");
-                    return;
-                }
-            }
-        }
-        storage[countResumes++] = resume;
     }
-
-    /*public Resume get(String uuid) {
-        for (int i = 0; i < countResumes; i++) {
-            if (checkUuid(i, uuid)) {
-                return storage[i];
-            }
-        }
-        System.out.println("Резюме get " + uuid + " не обнаружено");
-        return null;
-    }*/
 
     public Object get(String uuid) {
         return getIndex(uuid) >= 0 ? storage[getIndex(uuid)] : "Резюме get " + uuid + " не обнаружено";
@@ -47,13 +32,11 @@ public class ArrayStorage {
     }
 
     public void update(Resume resume) {
-        for (int i = 0; i < countResumes; i++) {
-            if (getIndex(resume.toString()) >= 0) {
-                System.out.println("Обновлено резюме: " + resume);
-                break;
-            } else {
-                System.out.println("Резюме update " + resume + " не обнаружено");
-            }
+        if (getIndex(resume.toString()) >= 0) {
+            storage[getIndex(resume.toString())] = resume;
+            System.out.println("Резюме update " + resume + " обновлено");
+        } else {
+            System.out.println("Резюме update " + resume + " не обнаружено");
         }
     }
 
@@ -74,14 +57,6 @@ public class ArrayStorage {
         Arrays.fill(storage, 0, countResumes , null);
         countResumes = 0;
     }
-
-//    private boolean checkUuid(int i, String uuid) {
-//        return storage[i].toString().equals(uuid);
-//    }
-    
-//    private boolean checkResume(int i, Resume resume) {
-//        return storage[i].equals(resume);
-//    }
 
     int getIndex(String uuid) {
         for (int i = 0; i < countResumes; i++) {
