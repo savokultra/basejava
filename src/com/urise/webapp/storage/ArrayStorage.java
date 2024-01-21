@@ -8,6 +8,7 @@ public class ArrayStorage {
     private static final int STORAGE_SIZE = 10000;
     private final Resume[] storage = new Resume[STORAGE_SIZE];
     private int countResumes;
+    private int index;
 
     public void save(Resume resume) {
         if (countResumes >= storage.length) {
@@ -20,7 +21,7 @@ public class ArrayStorage {
     }
 
     public Object get(String uuid) {
-        return getIndex(uuid) >= 0 ? storage[getIndex(uuid)] : "Резюме get " + uuid + " не обнаружено";
+        return getIndex(uuid) >= 0 ? storage[index] : "Резюме get " + uuid + " не обнаружено";
     }
 
     public int size() {
@@ -33,7 +34,7 @@ public class ArrayStorage {
 
     public void update(Resume resume) {
         if (getIndex(resume.toString()) >= 0) {
-            storage[getIndex(resume.toString())] = resume;
+            storage[index] = resume;
             System.out.println("Резюме update " + resume + " обновлено");
         } else {
             System.out.println("Резюме update " + resume + " не обнаружено");
@@ -43,7 +44,7 @@ public class ArrayStorage {
     public void delete(String uuid) {
         if (getIndex(uuid) >= 0) {
             countResumes--;
-            storage[getIndex(uuid)] = storage[countResumes];
+            storage[index] = storage[countResumes];
             storage[countResumes] = null;
             System.out.println("Удален " + uuid);
         } else {
@@ -56,10 +57,11 @@ public class ArrayStorage {
         countResumes = 0;
     }
 
-    int getIndex(String uuid) {
+    private int getIndex(String uuid) {
+        index = 0;
         for (int i = 0; i < countResumes; i++) {
             if (storage[i].toString().equals(uuid)) {
-                return i;
+                return index = i;
             }
         }
         return - 1;
