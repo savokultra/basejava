@@ -13,7 +13,7 @@ public class ArrayStorage {
     public void save(Resume resume) {
         if (countResumes >= storage.length) {
             System.out.println("Лимит резюме достигнут");
-        } else if (getIndex(resume.toString()) > 0) {
+        } else if (getIndex(resume.toString()) >= 0) {
             System.out.println("Резюме " + resume + " уже существует");
         } else {
             storage[countResumes++] = resume;
