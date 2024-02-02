@@ -1,9 +1,10 @@
 package com.urise.webapp.storage;
 
 import com.urise.webapp.model.Resume;
+
 import java.util.Arrays;
 
-public class ArrayStorage {
+public class ArrayStorage implements Storage {
 
     private static final int STORAGE_SIZE = 10000;
     private final Resume[] storage = new Resume[STORAGE_SIZE];
@@ -19,11 +20,14 @@ public class ArrayStorage {
         }
     }
 
-    public Object get(String uuid) {
+    public Resume get(String uuid) {
         int index = getIndex(uuid);
-        return index >= 0
-        ? storage[index]
-        : "Резюме get " + uuid + " не обнаружено";
+        if (index < 0) {
+            System.out.println("Резюме + " + uuid + " не обнаружено");
+            return null;
+        } else {
+            return storage[index];
+        }
     }
 
     public int size() {

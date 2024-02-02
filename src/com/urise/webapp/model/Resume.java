@@ -1,7 +1,5 @@
 package com.urise.webapp.model;
 
-import java.util.Objects;
-
 /**
  * Initial resume class
  */
@@ -22,7 +20,7 @@ public class Resume {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Resume resume = (Resume) o;
-        return Objects.equals(uuid, resume.uuid);
+        return uuid.equals(resume.uuid);
     }
 
     @Override
