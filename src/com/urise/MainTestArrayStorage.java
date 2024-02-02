@@ -44,3 +44,21 @@ public class MainTestArrayStorage {
         }
     }
 }
+
+/*
+    protected int getIndex(String uuid) {
+        for (int i = 0; i < countResumes; i++) {
+            if (storage[i].toString().equals(uuid)) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+        @Override
+    protected int getIndex(String uuid) {
+        Resume searchKey = new Resume();
+        searchKey.setUuid(uuid);
+        return Arrays.binarySearch(storage, 0, countResumes, searchKey);
+    }
+*/
