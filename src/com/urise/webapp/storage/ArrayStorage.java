@@ -4,11 +4,7 @@ import com.urise.webapp.model.Resume;
 
 import java.util.Arrays;
 
-public class ArrayStorage implements Storage {
-
-    private static final int STORAGE_SIZE = 10000;
-    private final Resume[] storage = new Resume[STORAGE_SIZE];
-    private int countResumes;
+public class ArrayStorage extends AbstractArrayStorage {
 
     public void save(Resume resume) {
         if (countResumes >= storage.length) {
@@ -28,10 +24,6 @@ public class ArrayStorage implements Storage {
         } else {
             return storage[index];
         }
-    }
-
-    public int size() {
-        return countResumes;
     }
 
     public Resume[] getAll() {
@@ -65,7 +57,7 @@ public class ArrayStorage implements Storage {
         countResumes = 0;
     }
 
-    private int getIndex(String uuid) {
+    protected int getIndex(String uuid) {
         for (int i = 0; i < countResumes; i++) {
             if (storage[i].toString().equals(uuid)) {
                 return i;
