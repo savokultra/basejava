@@ -16,16 +16,6 @@ public class ArrayStorage extends AbstractArrayStorage {
         }
     }
 
-    public Resume get(String uuid) {
-        int index = getIndex(uuid);
-        if (index < 0) {
-            System.out.println("Резюме + " + uuid + " не обнаружено");
-            return null;
-        } else {
-            return storage[index];
-        }
-    }
-
     public Resume[] getAll() {
         return Arrays.copyOf(storage, countResumes);
     }
