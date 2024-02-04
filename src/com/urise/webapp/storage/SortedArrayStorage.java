@@ -28,7 +28,6 @@ public class SortedArrayStorage extends AbstractArrayStorage {
             System.out.println("Резюме " + resume + " уже существует");
         } else {
             storage[countResumes++] = resume;
-            System.out.println(resume + " save = " + Arrays.binarySearch(storage, 0, countResumes, resume));
             int cell = Arrays.binarySearch(storage, 0, countResumes, resume);
             if (cell < 0) {
                 cell = cell * -1 -1;
