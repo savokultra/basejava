@@ -4,7 +4,23 @@ import com.urise.webapp.model.Resume;
 import java.util.Arrays;
 public class SortedArrayStorage extends AbstractArrayStorage {
 
-//    TODO сделать сортировку методом двоичного поиска
+    @Override
+    public void delete(String uuid) {
+        int index = getIndex(uuid);
+        if (index >= 0) {
+            countResumes--;
+            while (index < countResumes) {
+                storage[index] = storage[index + 1];
+                index++;
+            }
+            storage[index] = null;
+            System.out.println("Удален " + uuid);
+        } else {
+            System.out.println("Нельзя удалить " + uuid + " т.к. uuid не обнаружен");
+        }
+    }
+
+    //    TODO сделать сортировку методом двоичного поиска
     @Override
     public void save(Resume resume) {
         if (countResumes >= storage.length) {
