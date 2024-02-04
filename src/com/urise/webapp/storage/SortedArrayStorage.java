@@ -20,7 +20,6 @@ public class SortedArrayStorage extends AbstractArrayStorage {
         }
     }
 
-    //    TODO сделать сортировку методом двоичного поиска
     @Override
     public void save(Resume resume) {
         if (countResumes >= storage.length) {
