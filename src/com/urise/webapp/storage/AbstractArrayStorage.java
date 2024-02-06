@@ -10,18 +10,19 @@ public abstract class AbstractArrayStorage implements Storage {
     protected int countResumes = 0;
 
     @Override
-    public int size() {
-        return countResumes;
+    public void clear() {
+        Arrays.fill(storage, 0, countResumes , null);
+        countResumes = 0;
     }
 
     @Override
-    public Resume get(String uuid) {
-        int index = getIndex(uuid);
-        if (index < 0) {
-            System.out.println("Резюме + " + uuid + " не обнаружено");
-            return null;
+    public void update(Resume resume) {
+        int index = getIndex(resume.toString());
+        if (index >= 0) {
+            storage[index] = resume;
+            System.out.println("Резюме update " + resume + " обновлено");
         } else {
-            return storage[index];
+            System.out.println("Резюме update " + resume + " не обнаружено");
         }
     }
 
@@ -37,18 +38,13 @@ public abstract class AbstractArrayStorage implements Storage {
     }
 
     @Override
-    public Resume[] getAll() {
-        return Arrays.copyOf(storage, countResumes);
-    }
-
-    @Override
-    public void update(Resume resume) {
-        int index = getIndex(resume.toString());
-        if (index >= 0) {
-            storage[index] = resume;
-            System.out.println("Резюме update " + resume + " обновлено");
+    public Resume get(String uuid) {
+        int index = getIndex(uuid);
+        if (index < 0) {
+            System.out.println("Резюме + " + uuid + " не обнаружено");
+            return null;
         } else {
-            System.out.println("Резюме update " + resume + " не обнаружено");
+            return storage[index];
         }
     }
 
@@ -66,9 +62,13 @@ public abstract class AbstractArrayStorage implements Storage {
     }
 
     @Override
-    public void clear() {
-        Arrays.fill(storage, 0, countResumes , null);
-        countResumes = 0;
+    public Resume[] getAll() {
+        return Arrays.copyOf(storage, countResumes);
+    }
+
+    @Override
+    public int size() {
+        return countResumes;
     }
 
     protected abstract int getIndex(String uuid);
