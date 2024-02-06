@@ -10,13 +10,13 @@ public abstract class AbstractArrayStorage implements Storage {
     protected int countResumes = 0;
 
     @Override
-    public void clear() {
+    final public void clear() {
         Arrays.fill(storage, 0, countResumes , null);
         countResumes = 0;
     }
 
     @Override
-    public void update(Resume resume) {
+    final public void update(Resume resume) {
         int index = getIndex(resume.toString());
         if (index >= 0) {
             storage[index] = resume;
@@ -27,7 +27,7 @@ public abstract class AbstractArrayStorage implements Storage {
     }
 
     @Override
-    public void save(Resume resume) {
+    final public void save(Resume resume) {
         if (countResumes >= storage.length) {
             System.out.println("Лимит резюме достигнут");
         } else if (getIndex(resume.toString()) >= 0) {
@@ -38,7 +38,7 @@ public abstract class AbstractArrayStorage implements Storage {
     }
 
     @Override
-    public Resume get(String uuid) {
+    final public Resume get(String uuid) {
         int index = getIndex(uuid);
         if (index < 0) {
             System.out.println("Резюме + " + uuid + " не обнаружено");
@@ -49,7 +49,7 @@ public abstract class AbstractArrayStorage implements Storage {
     }
 
     @Override
-    public void delete(String uuid) {
+    final public void delete(String uuid) {
         int index = getIndex(uuid);
         if (index >= 0) {
             countResumes--;
@@ -62,14 +62,16 @@ public abstract class AbstractArrayStorage implements Storage {
     }
 
     @Override
-    public Resume[] getAll() {
+    final public Resume[] getAll() {
         return Arrays.copyOf(storage, countResumes);
     }
 
     @Override
-    public int size() {
+    final public int size() {
         return countResumes;
     }
 
     protected abstract int getIndex(String uuid);
+    protected abstract int insertResume(String uuid);
+    protected abstract int removeResume(String uuid);
 }

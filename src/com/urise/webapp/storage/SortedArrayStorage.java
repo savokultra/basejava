@@ -4,7 +4,7 @@ import com.urise.webapp.model.Resume;
 import java.util.Arrays;
 public class SortedArrayStorage extends AbstractArrayStorage {
 
-    @Override
+    /*@Override
     public void delete(String uuid) {
         int index = getIndex(uuid);
         if (index >= 0) {
@@ -39,6 +39,16 @@ public class SortedArrayStorage extends AbstractArrayStorage {
                 storage[cell] = temp;
             }
         }
+    }*/
+
+    @Override
+    protected int insertResume(String uuid) {
+        return 0;
+    }
+
+    @Override
+    protected int removeResume(String uuid) {
+        return 0;
     }
 
     @Override

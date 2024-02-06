@@ -11,4 +11,14 @@ public class ArrayStorage extends AbstractArrayStorage {
         }
         return -1;
     }
+
+    @Override
+    protected int insertResume(String uuid) {
+        return 0;
+    }
+
+    @Override
+    protected int removeResume(String uuid) {
+        return 0;
+    }
 }
