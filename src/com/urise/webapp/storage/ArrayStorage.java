@@ -20,7 +20,7 @@ public class ArrayStorage extends AbstractArrayStorage {
     }
 
     @Override
-    protected void removeResume(String uuid, int index) {
+    protected void removeResume(int index) {
         storage[index] = storage[countResumes];
     }
 }

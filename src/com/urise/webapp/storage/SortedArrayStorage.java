@@ -2,6 +2,7 @@ package com.urise.webapp.storage;
 
 import com.urise.webapp.model.Resume;
 import java.util.Arrays;
+
 public class SortedArrayStorage extends AbstractArrayStorage {
 
     @Override
@@ -11,7 +12,7 @@ public class SortedArrayStorage extends AbstractArrayStorage {
     }
 
     @Override
-    protected void removeResume(String uuid, int index) {
+    protected void removeResume(int index) {
         System.arraycopy(storage, index + 1, storage, index, countResumes - index);
     }
 
