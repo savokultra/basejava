@@ -57,6 +57,7 @@ public abstract class AbstractArrayStorage implements Storage {
         if (index >= 0) {
             countResumes--;
             removeResume(uuid, index);
+            storage[countResumes] = null;
             System.out.println("Удален " + uuid);
         } else {
             System.out.println("Нельзя удалить " + uuid + " т.к. uuid не обнаружен");
