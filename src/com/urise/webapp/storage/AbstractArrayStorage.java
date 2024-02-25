@@ -53,7 +53,7 @@ public abstract class AbstractArrayStorage implements Storage {
     }
 
     @Override
-    final public void delete (String uuid) throws NotExistStorageException {
+    final public void delete (String uuid) {
         int index = getIndex(uuid);
         if (index < 0) {
             throw new NotExistStorageException(uuid);
