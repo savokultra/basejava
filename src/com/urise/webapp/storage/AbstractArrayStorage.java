@@ -1,5 +1,8 @@
 package com.urise.webapp.storage;
 
+import com.urise.webapp.exception.ExistStorageException;
+import com.urise.webapp.exception.NotExistStorageException;
+import com.urise.webapp.exception.StorageException;
 import com.urise.webapp.model.Resume;
 
 import java.util.Arrays;
@@ -17,9 +20,9 @@ public abstract class AbstractArrayStorage implements Storage {
 
     @Override
     final public void update(Resume resume) {
-        int index = getIndex(resume.toString());
+        int index = getIndex(resume.getUuid());
         if (index < 0) {
-            System.out.println("Резюме update " + resume + " не обнаружено");
+            throw new NotExistStorageException(resume.getUuid());
         } else {
             storage[index] = resume;
             System.out.println("Резюме update " + resume + " обновлено");
@@ -30,9 +33,9 @@ public abstract class AbstractArrayStorage implements Storage {
     final public void save(Resume resume) {
         int index = getIndex(resume.getUuid());
         if (countResumes >= STORAGE_LIMIT) {
-            System.out.println("Лимит резюме достигнут");
+            throw new StorageException("Storage overflow", resume.getUuid());
         } else if (index >= 0) {
-            System.out.println("Резюме " + resume + " уже существует");
+            throw new ExistStorageException(resume.getUuid());
         } else {
             index = -index - 1;
             insertResume(resume, index);
@@ -44,8 +47,7 @@ public abstract class AbstractArrayStorage implements Storage {
     final public Resume get(String uuid) {
         int index = getIndex(uuid);
         if (index < 0) {
-            System.out.println("Резюме + " + uuid + " не обнаружено");
-            return null;
+            throw new NotExistStorageException(uuid);
         }
         return storage[index];
     }
@@ -54,7 +56,7 @@ public abstract class AbstractArrayStorage implements Storage {
     final public void delete(String uuid) {
         int index = getIndex(uuid);
         if (index < 0) {
-            System.out.println("Нельзя удалить " + uuid + " т.к. uuid не обнаружен");
+            throw new NotExistStorageException(uuid);
         } else {
             countResumes--;
             removeResume(index);
