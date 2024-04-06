@@ -7,7 +7,9 @@ import org.junit.Before;
 import org.junit.Test;
 
 public abstract class AbstractArrayStorageTest {
+//    public class AbstractArrayStorageTest { что бы запустилось раскоментируй эту строку и закоментирую строку выше
     private Storage storage;
+//    private Storage storage = new ArrayStorage(); что бы запустилось раскоментируй эту строку и закоментирую строку выше
 
     private static final String UUID_1 = "uuid1";
     private static final String UUID_2 = "uuid2";
