@@ -11,20 +11,7 @@ import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-//class Name {
-//    константы
-//    статические поля
-//    final-поля
-//            поля
-//    конструкторы
-//    геттеры/сеттеры
-//            методы
-//    перегруженные методы
-//    вложенные классы
-//}
-
 public abstract class AbstractArrayStorageTest {
-//    public class AbstractArrayStorageTest { что бы запустилось раскоментируй эту строку и закоментирую строку выше
 
     private static final String UUID_1 = "uuid1";
     private static final Resume RESUME_1 = new Resume(UUID_1);
@@ -38,7 +25,6 @@ public abstract class AbstractArrayStorageTest {
     private static final String UUID_4 = "uuid4";
     private static final Resume RESUME_4 = new Resume(UUID_4);
     private final Storage storage;
-    //    private Storage storage = new ArrayStorage(); что бы запустилось раскоментируй эту строку и закоментирую строку выше
 
     protected AbstractArrayStorageTest(Storage storage) {
         this.storage = storage;
