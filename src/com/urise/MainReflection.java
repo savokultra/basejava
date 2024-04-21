@@ -9,14 +9,15 @@ import java.lang.reflect.Method;
 public class MainReflection {
     public static void main(String[] args) throws IllegalAccessException, NoSuchMethodException, InvocationTargetException {
         Resume r = new Resume();
-        Field field = r.getClass().getDeclaredFields()[0];
+        Class<? extends Resume> resumeClass = r.getClass();
+        Field field = resumeClass.getDeclaredFields()[0];
         field.setAccessible(true);
         System.out.println(field.getName());
         System.out.println(field.get(r));
         field.set(r, "new_uuid");
         // TODO : invoke r.toString via reflection*/
 //        https://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
-        Method method = r.getClass().getMethod("toString");
+        Method method = resumeClass.getMethod("toString");
         System.out.println(method.invoke(r));
         System.out.println(r);
     }
