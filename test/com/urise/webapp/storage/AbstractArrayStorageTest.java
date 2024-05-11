@@ -26,6 +26,7 @@ public abstract class AbstractArrayStorageTest {
     protected AbstractArrayStorageTest(Storage storage) {
         this.storage = storage;
     }
+
     @Before
     public void setUp() {
         storage.clear();
