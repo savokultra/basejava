@@ -8,6 +8,8 @@ import org.junit.Test;
 
 import java.util.Arrays;
 
+import static org.junit.Assert.fail;
+
 //class Name {
 //    константы
 //    статические поля
@@ -31,6 +33,7 @@ public abstract class AbstractArrayStorageTest {
 
     private static final String UUID_3 = "uuid3";
     Resume resume3 = new Resume(UUID_3);
+
     private final Storage storage;
     //    private Storage storage = new ArrayStorage(); что бы запустилось раскоментируй эту строку и закоментирую строку выше
 
@@ -70,7 +73,9 @@ public abstract class AbstractArrayStorageTest {
 
     @Test
     public void save() {
-        Assert.assertEquals(resume2, storage.get("uuid2"));
+        Resume resume4 = new Resume("uuid4");
+        storage.save(resume4);
+        Assert.assertEquals(resume4, storage.get("uuid4"));
     }
 
     @Test(expected = NotExistStorageException.class)
@@ -87,5 +92,18 @@ public abstract class AbstractArrayStorageTest {
     @Test(expected = NotExistStorageException.class)
     public void getNotExist() {
         storage.get("dummy");
+    }
+
+    @Test(expected = AssertionError.class)
+    public void checkStorageOverFlow() {
+        storage.clear();
+        for (int i = 0; i < 10000; i++) {
+            storage.save(new Resume());
+        }
+        try {
+            save();
+        } catch (Exception e) {
+            fail(e.getMessage());
+        }
     }
 }
