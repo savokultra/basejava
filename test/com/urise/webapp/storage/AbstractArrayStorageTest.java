@@ -26,13 +26,13 @@ public abstract class AbstractArrayStorageTest {
 //    public class AbstractArrayStorageTest { что бы запустилось раскоментируй эту строку и закоментирую строку выше
 
     private static final String UUID_1 = "uuid1";
-    Resume resume1 = new Resume(UUID_1);
+    private final Resume resume1 = new Resume(UUID_1);
 
     private static final String UUID_2 = "uuid2";
-    Resume resume2 = new Resume(UUID_2);
+    private final Resume resume2 = new Resume(UUID_2);
 
     private static final String UUID_3 = "uuid3";
-    Resume resume3 = new Resume(UUID_3);
+    private final Resume resume3 = new Resume(UUID_3);
 
     private final Storage storage;
     //    private Storage storage = new ArrayStorage(); что бы запустилось раскоментируй эту строку и закоментирую строку выше
@@ -50,13 +50,13 @@ public abstract class AbstractArrayStorageTest {
 
     @Test
     public void size() {
-        Assert.assertEquals(3, storage.size());
+        assertSize(3);
     }
 
     @Test
     public void clear() {
         storage.clear();
-        Assert.assertEquals(0, storage.size());
+        assertSize(0);
     }
 
     @Test
@@ -86,7 +86,9 @@ public abstract class AbstractArrayStorageTest {
 
     @Test
     public void get() {
-        Assert.assertEquals(resume3, storage.get("uuid3"));
+        for(Resume resume : storage.getAll()) {
+            assertGet(resume);
+        }
     }
 
     @Test(expected = NotExistStorageException.class)
@@ -105,5 +107,13 @@ public abstract class AbstractArrayStorageTest {
         } catch (Exception e) {
             fail(e.getMessage());
         }
+    }
+
+    public void assertSize(int size) {
+        Assert.assertEquals(size, storage.size());
+    }
+
+    public void assertGet(Resume resume) {
+        Assert.assertEquals(resume, storage.get(resume.getUuid()));
     }
 }
