@@ -70,7 +70,7 @@ public abstract class AbstractArrayStorageTest {
         assertSize(4);
 
     }
-//    @Test(expected = NotExistStorageException.class)
+
     @Test(expected = NotExistStorageException.class)
     public void delete() {
         storage.delete("uuid1");
