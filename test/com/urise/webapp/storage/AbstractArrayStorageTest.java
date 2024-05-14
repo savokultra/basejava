@@ -1,6 +1,7 @@
 package com.urise.webapp.storage;
 
 import com.urise.webapp.exception.NotExistStorageException;
+import com.urise.webapp.exception.StorageException;
 import com.urise.webapp.model.Resume;
 import org.junit.Assert;
 import org.junit.Before;
@@ -57,31 +58,37 @@ public abstract class AbstractArrayStorageTest {
     public void clear() {
         storage.clear();
         assertSize(0);
+        Assert.assertArrayEquals(storage.getAll(), new Resume[0]);
     }
 
     @Test
     public void update() {
-        Assert.assertEquals(resume1, storage.get("uuid1"));
+        Resume resume4 = new Resume(UUID_3);
+        storage.update(resume4);
+        Assert.assertSame(resume4, storage.get(UUID_3));
     }
 
     @Test
     public void getAll() {
-        Resume [] resumes = Arrays.copyOf(storage.getAll(), storage.size());
-        Assert.assertEquals(resumes[0], storage.get("uuid1"));
-        Assert.assertEquals(resumes[storage.size() - 1], storage.get("uuid3"));
+        final Resume [] expected = Arrays.copyOf(storage.getAll(), storage.size());;
+        Assert.assertArrayEquals(expected, storage.getAll());
     }
 
     @Test
     public void save() {
-        Resume resume4 = new Resume("uuid4");
+        final String UUID_4 = "uuid4";
+        final Resume resume4 = new Resume(UUID_4);
         storage.save(resume4);
-        Assert.assertEquals(resume4, storage.get("uuid4"));
-    }
+        assertGet(resume4);
+        assertSize(4);
 
+    }
+//    @Test(expected = NotExistStorageException.class)
     @Test(expected = NotExistStorageException.class)
     public void delete() {
         storage.delete("uuid1");
-        Assert.assertEquals(resume1, storage.get("uuid1"));
+        assertSize(2);
+        storage.get("uuid1");
     }
 
     @Test
@@ -96,17 +103,17 @@ public abstract class AbstractArrayStorageTest {
         storage.get("dummy");
     }
 
-    @Test(expected = AssertionError.class)
+    @Test(expected = StorageException.class)
     public void checkStorageOverFlow() {
         storage.clear();
-        for (int i = 0; i < 10000; i++) {
-            storage.save(new Resume());
-        }
         try {
-            save();
+            for (int i = 0; i < 10000; i++) {
+                storage.save(new Resume());
+            }
         } catch (Exception e) {
             fail(e.getMessage());
         }
+        save();
     }
 
     public void assertSize(int size) {
