@@ -57,7 +57,7 @@ public abstract class AbstractArrayStorageTest {
 
     @Test
     public void getAll() {
-        final Resume [] expected = Arrays.copyOf(storage.getAll(), storage.size());;
+        final Resume[] expected = Arrays.copyOf(storage.getAll(), storage.size());;
         Assert.assertArrayEquals(expected, storage.getAll());
     }
 
