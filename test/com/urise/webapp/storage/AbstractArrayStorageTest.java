@@ -40,6 +40,7 @@ public abstract class AbstractArrayStorageTest {
     protected AbstractArrayStorageTest(Storage storage) {
         this.storage = storage;
     }
+
     @Before
     public void setUp() {
         storage.clear();
@@ -80,7 +81,6 @@ public abstract class AbstractArrayStorageTest {
         storage.save(resume4);
         assertGet(resume4);
         assertSize(4);
-
     }
 
     @Test(expected = NotExistStorageException.class)
