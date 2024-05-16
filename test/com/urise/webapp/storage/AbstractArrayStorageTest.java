@@ -7,8 +7,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.Arrays;
-
+import static com.urise.webapp.storage.AbstractArrayStorage.STORAGE_LIMIT;
 import static org.junit.Assert.fail;
 
 public abstract class AbstractArrayStorageTest {
@@ -57,7 +56,7 @@ public abstract class AbstractArrayStorageTest {
 
     @Test
     public void getAll() {
-        final Resume[] expected = Arrays.copyOf(storage.getAll(), storage.size());;
+        final Resume [] expected = { resume1, resume2, resume3 };
         Assert.assertArrayEquals(expected, storage.getAll());
     }
 
@@ -68,14 +67,13 @@ public abstract class AbstractArrayStorageTest {
         storage.save(resume4);
         assertGet(resume4);
         assertSize(4);
-
     }
 
     @Test(expected = NotExistStorageException.class)
     public void delete() {
-        storage.delete("uuid1");
+        storage.delete(UUID_1);
         assertSize(2);
-        storage.get("uuid1");
+        storage.get(UUID_1);
     }
 
     @Test
@@ -87,14 +85,15 @@ public abstract class AbstractArrayStorageTest {
 
     @Test(expected = NotExistStorageException.class)
     public void getNotExist() {
-        storage.get("dummy");
+        final String dummy = "dummy";
+        storage.get(dummy);
     }
 
     @Test(expected = StorageException.class)
     public void checkStorageOverFlow() {
         storage.clear();
         try {
-            for (int i = 0; i < 10000; i++) {
+            for (int i = 0; i < STORAGE_LIMIT; i++) {
                 storage.save(new Resume());
             }
         } catch (Exception e) {
