@@ -4,6 +4,8 @@ import com.urise.webapp.model.Resume;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Iterator;
+import java.util.Objects;
 
 public class MainCollections {
     private static final String UUID_1 = "uuid1";
@@ -21,5 +23,17 @@ public class MainCollections {
     public static void main(String[] args) {
         Collection<Resume> collection = new ArrayList<>();
         collection.add(RESUME_1);
+        collection.add(RESUME_2);
+        collection.add(RESUME_3);
+
+        Iterator<Resume> iterator = collection.iterator();
+        while (iterator.hasNext()) {
+            Resume resume = iterator.next();
+            System.out.println(resume);
+            if (Objects.equals(resume.getUuid(), UUID_1)) {
+                iterator.remove();
+            }
+            System.out.println(collection);
+        }
     }
 }
