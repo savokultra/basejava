@@ -40,13 +40,13 @@ public class ListStorage extends AbstractStorage {
 
     @Override
     public void delete(String uuid) {
-        Resume resumeDelite = new Resume(uuid);
-        int i = list.indexOf(resumeDelite);
+        Resume resumeDelete = new Resume(uuid);
+        int i = list.indexOf(resumeDelete);
         if (i < 0) {
-            throw new NotExistStorageException(resumeDelite.getUuid());
+            throw new NotExistStorageException(resumeDelete.getUuid());
         }
         list.remove(i);
-        System.out.println("удалено резюме: " + resumeDelite);
+        System.out.println("удалено резюме: " + resumeDelete);
     }
 
     @Override
