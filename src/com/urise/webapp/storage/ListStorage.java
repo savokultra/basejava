@@ -9,6 +9,21 @@ public class ListStorage extends AbstractStorage {
     static ArrayList<Resume> list = new ArrayList<>();
 
     @Override
+    protected Object getSearchKey(String uuid) {
+        return null;
+    }
+
+    @Override
+    protected void doUpdate(Resume resume, Object searchKey) {
+
+    }
+
+    @Override
+    protected boolean isExist(Object searchKey) {
+        return false;
+    }
+
+    @Override
     public void clear() {
         list.clear();
     }
