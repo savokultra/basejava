@@ -24,6 +24,21 @@ public class ListStorage extends AbstractStorage {
     }
 
     @Override
+    protected void doSave(Resume resume, Object searchKey) {
+
+    }
+
+    @Override
+    protected Resume doGet(Object searchKey) {
+        return null;
+    }
+
+    @Override
+    public void doDelete(Object searchKey) {
+
+    }
+
+    @Override
     public void clear() {
         list.clear();
     }

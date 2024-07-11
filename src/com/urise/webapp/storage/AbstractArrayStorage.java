@@ -1,7 +1,5 @@
 package com.urise.webapp.storage;
 
-import com.urise.webapp.exception.ExistStorageException;
-import com.urise.webapp.exception.NotExistStorageException;
 import com.urise.webapp.exception.StorageException;
 import com.urise.webapp.model.Resume;
 
@@ -25,39 +23,25 @@ public abstract class AbstractArrayStorage extends AbstractStorage {
     }
 
     @Override
-    final public void save(Resume resume) {
-        int index = getSearchKey(resume.getUuid());
+    protected void doSave(Resume resume, Object index) {
         if (countResumes >= STORAGE_LIMIT) {
             throw new StorageException("Storage overflow", resume.getUuid());
-        } else if (index >= 0) {
-            throw new ExistStorageException(resume.getUuid());
         } else {
-            index = -index - 1;
-            insertResume(resume, index);
+            insertElement(resume, (Integer) index);
             countResumes++;
         }
     }
 
     @Override
-    final public Resume get(String uuid) {
-        int index = getSearchKey(uuid);
-        if (index < 0) {
-            throw new NotExistStorageException(uuid);
-        }
-        return storage[index];
+    protected Resume doGet(Object index) {
+        return storage[(Integer) index];
     }
 
     @Override
-    final public void delete(String uuid) {
-        int index = getSearchKey(uuid);
-        if (index < 0) {
-            throw new NotExistStorageException(uuid);
-        } else {
+    public void doDelete(Object index) {
             countResumes--;
-            removeResume(index);
+            fillDeletedElement((Integer) index);
             storage[countResumes] = null;
-            System.out.println("Удален " + uuid);
-        }
     }
 
     @Override
@@ -77,7 +61,7 @@ public abstract class AbstractArrayStorage extends AbstractStorage {
 
     protected abstract Integer getSearchKey(String uuid);
 
-    protected abstract void insertResume(Resume resume, int index);
+    protected abstract void insertElement(Resume resume, int index);
 
-    protected abstract void removeResume(int index);
+    protected abstract void fillDeletedElement(int index);
 }

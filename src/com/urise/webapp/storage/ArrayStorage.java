@@ -5,12 +5,13 @@ import com.urise.webapp.model.Resume;
 public class ArrayStorage extends AbstractArrayStorage {
 
     @Override
-    protected void insertResume(Resume resume, int index) {
+    protected void insertElement(Resume resume, int index) {
         storage[countResumes] = resume;
     }
 
     @Override
-    protected void removeResume(int index) {
+    protected void fillDeletedElement(int index) {
+        System.out.println("Удален " + storage[index]);
         storage[index] = storage[countResumes];
     }
 
