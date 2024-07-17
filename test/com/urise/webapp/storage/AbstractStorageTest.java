@@ -9,20 +9,17 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-public abstract class AbstractArrayStorageTest {
-
-
+public abstract class AbstractStorageTest {
     private final Storage storage;
+
     private static final String UUID_1 = "uuid1";
-    private static final Resume RESUME_1;
-
     private static final String UUID_2 = "uuid2";
-    private static final Resume RESUME_2;
-
     private static final String UUID_3 = "uuid3";
-    private static final Resume RESUME_3;
-
     private static final String UUID_4 = "uuid4";
+
+    private static final Resume RESUME_1;
+    private static final Resume RESUME_2;
+    private static final Resume RESUME_3;
     private static final Resume RESUME_4;
 
     static {
@@ -32,7 +29,7 @@ public abstract class AbstractArrayStorageTest {
         RESUME_4 = new Resume(UUID_4);
     }
 
-    protected AbstractArrayStorageTest(Storage storage) {
+    protected AbstractStorageTest(Storage storage) {
         this.storage = storage;
     }
 

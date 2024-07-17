@@ -1,81 +1,51 @@
 package com.urise.webapp.storage;
 
-import com.urise.webapp.exception.NotExistStorageException;
 import com.urise.webapp.model.Resume;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ListStorage extends AbstractStorage {
-    static ArrayList<Resume> list = new ArrayList<>();
+    private static final List<Resume> list = new ArrayList<>();
 
     @Override
-    protected Object getSearchKey(String uuid) {
+    protected Integer getSearchKey(String uuid) {
+        for (int i = 0; i < list.size(); i++) {
+            if (list.get(i).getUuid().equals(uuid)) {
+                return i;
+            }
+        }
         return null;
     }
 
     @Override
     protected void doUpdate(Resume resume, Object searchKey) {
-
+        list.set((Integer) searchKey, resume);
     }
 
     @Override
     protected boolean isExist(Object searchKey) {
-        return false;
+        return searchKey != null;
     }
 
     @Override
     protected void doSave(Resume resume, Object searchKey) {
-
+        list.add(resume);
     }
 
     @Override
     protected Resume doGet(Object searchKey) {
-        return null;
+        return list.get((Integer) searchKey);
     }
 
     @Override
     public void doDelete(Object searchKey) {
-
+        list.remove(((Integer) searchKey).intValue());
     }
 
     @Override
     public void clear() {
         list.clear();
-    }
-
-    @Override
-    public void update(Resume resume) {
-        int i = list.indexOf(resume);
-        if (i < 0) {
-            throw new NotExistStorageException(resume.getUuid());
-        }
-        list.set(i, resume);
-        System.out.println("обновлено резюме: " + resume);
-    }
-
-    @Override
-    public void save(Resume resume) {
-        list.add(resume);
-    }
-
-    @Override
-    public Resume get(String uuid) {
-        Resume resumeGet = new Resume(uuid);
-        if (!list.contains(resumeGet)) {
-            throw new NotExistStorageException(uuid);
-        }
-        return resumeGet;
-    }
-
-    @Override
-    public void delete(String uuid) {
-        Resume resumeDelete = new Resume(uuid);
-        int i = list.indexOf(resumeDelete);
-        if (i < 0) {
-            throw new NotExistStorageException(resumeDelete.getUuid());
-        }
-        list.remove(i);
-        System.out.println("удалено резюме: " + resumeDelete);
     }
 
     @Override

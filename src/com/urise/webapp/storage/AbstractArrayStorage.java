@@ -39,9 +39,9 @@ public abstract class AbstractArrayStorage extends AbstractStorage {
 
     @Override
     public void doDelete(Object index) {
-            countResumes--;
-            fillDeletedElement((Integer) index);
-            storage[countResumes] = null;
+        countResumes--;
+        fillDeletedElement((Integer) index);
+        storage[countResumes] = null;
     }
 
     @Override
