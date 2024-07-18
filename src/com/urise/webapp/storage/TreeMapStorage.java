@@ -26,8 +26,7 @@ public class TreeMapStorage extends AbstractStorage {
         if (searchKey != null) {
             try {
                 return map.containsKey((String) searchKey);
-            }
-            catch (ClassCastException e) {
+            } catch (ClassCastException e) {
                 return true;
             }
         }
