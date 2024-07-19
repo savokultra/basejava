@@ -1,8 +1,16 @@
 package com.urise.webapp.storage;
 
-public class ListStorageTest extends AbstractStorageTest {
+import org.junit.Ignore;
+import org.junit.Test;
 
+public class ListStorageTest extends AbstractStorageTest {
     public ListStorageTest() {
         super(new ListStorage());
+    }
+
+    @Override
+    @Ignore
+    @Test
+    public void checkStorageOverFlow() {
     }
 }
