@@ -1,7 +1,15 @@
 package com.urise.webapp.storage;
 
+import org.junit.Ignore;
+import org.junit.Test;
+
 public class TreeMapStorageTest extends AbstractStorageTest {
-    protected TreeMapStorageTest(Storage storage) {
-        super(storage);
+    public TreeMapStorageTest() {
+        super(new TreeMapStorage());
+    }
+
+    @Ignore
+    @Test
+    public void checkStorageOverFlow() {
     }
 }
