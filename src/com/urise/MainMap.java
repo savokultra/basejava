@@ -18,5 +18,7 @@ public class MainMap {
         System.out.println("get all = " + Arrays.toString(mapStorage.getAll()));
         mapStorage.update(RESUME_2);
         mapStorage.get("uuid2");
+        mapStorage.delete("uuid2");
+        System.out.println("get all after delete = " + Arrays.toString(mapStorage.getAll()));
     }
 }
