@@ -14,7 +14,9 @@ public class MainMap {
         Resume RESUME_2 = new Resume(UUID_2);
         mapStorage.save(RESUME_1);
         mapStorage.save(RESUME_2);
-        //get all выводить ключи и значения ? реализовать так ?
-        System.out.println(Arrays.toString(mapStorage.getAll()));
+        //get all выводить ключи и значения ?
+        System.out.println("get all = " + Arrays.toString(mapStorage.getAll()));
+        mapStorage.update(RESUME_2);
+        mapStorage.get("uuid2");
     }
 }

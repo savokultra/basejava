@@ -13,7 +13,7 @@ public class TreeMapStorage extends AbstractStorage {
         if (map.get(uuid) == null) {
             return uuid;
         }
-        return map.get(uuid);
+        return map.get(uuid).getUuid();
     }
 
     @Override
@@ -24,11 +24,7 @@ public class TreeMapStorage extends AbstractStorage {
     @Override
     protected boolean isExist(Object searchKey) {
         if (searchKey != null) {
-            try {
-                return map.containsKey((String) searchKey);
-            } catch (ClassCastException e) {
-                return true;
-            }
+            return map.containsKey((String) searchKey);
         }
         return false;
     }
