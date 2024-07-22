@@ -10,10 +10,7 @@ public class TreeMapStorage extends AbstractStorage {
 
     @Override
     protected Object getSearchKey(String uuid) {
-        if (map.get(uuid) == null) {
-            return uuid;
-        }
-        return map.get(uuid).getUuid();
+        return uuid;
     }
 
     @Override
