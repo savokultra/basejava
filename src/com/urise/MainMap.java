@@ -20,6 +20,5 @@ public class MainMap {
         mapStorage.get("uuid2");
         mapStorage.delete("uuid2");
         System.out.println("get all after delete = " + Arrays.toString(mapStorage.getAll()));
-        System.out.println("Add git hub");
     }
 }
