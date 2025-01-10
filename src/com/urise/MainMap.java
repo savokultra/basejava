@@ -21,5 +21,6 @@ public class MainMap {
         mapStorage.delete("uuid2");
         System.out.println("get all after delete = " + Arrays.toString(mapStorage.getAll()));
         System.out.println("Проверка");
+        System.out.println("Проверка10.01.2025");
     }
 }
