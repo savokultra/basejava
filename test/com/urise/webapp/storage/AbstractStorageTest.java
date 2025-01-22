@@ -9,7 +9,7 @@ import org.junit.Test;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 public abstract class AbstractStorageTest {
     protected Storage storage;
@@ -58,11 +58,11 @@ public abstract class AbstractStorageTest {
     public void update() {
         Resume resume5 = new Resume(UUID_1, "New Name");
         storage.update(resume5);
-        assertEquals(resume5, storage.get(UUID_1));
+        assertSame(resume5, storage.get(UUID_1));
     }
 
     @Test
-    public void getAllSorted() throws Exception {
+    public void getAllSorted() {
         List<Resume> list = storage.getAllSorted();
         assertEquals(3, list.size());
         assertEquals(list, Arrays.asList(RESUME_1, RESUME_2, RESUME_3));

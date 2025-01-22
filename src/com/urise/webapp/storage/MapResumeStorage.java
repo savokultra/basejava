@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 public class MapResumeStorage extends AbstractStorage {
-    private Map<String, Resume> map = new HashMap<>();
+    private final Map<String, Resume> map = new HashMap<>();
 
     @Override
     protected Object getSearchKey(String uuid) {
@@ -37,7 +37,7 @@ public class MapResumeStorage extends AbstractStorage {
 
     @Override
     public void doDelete(Object searchKey) {
-        map.remove((Resume) searchKey).getUuid();
+        map.remove(((Resume) searchKey).getUuid());
     }
 
     @Override
