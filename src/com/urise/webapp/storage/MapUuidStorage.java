@@ -14,37 +14,41 @@ public class MapUuidStorage extends AbstractStorage {
 
     @Override
     protected void doUpdate(Resume resume, Object searchKey) {
+        map.put((String) searchKey, resume);
     }
 
     @Override
     protected boolean isExist(Object searchKey) {
-        return false;
+        return map.containsKey((String) searchKey);
     }
 
     @Override
     protected void doSave(Resume resume, Object searchKey) {
+        map.put((String) searchKey, resume);
     }
 
     @Override
     protected Resume doGet(Object searchKey) {
-        return null;
+        return map.get((String) searchKey);
     }
 
     @Override
     public void doDelete(Object searchKey) {
+        map.remove((String) searchKey);
     }
 
     @Override
     public void clear() {
+        map.clear();
     }
 
     @Override
     public List<Resume> doCopyAll() {
-        return Collections.emptyList();
+        return new ArrayList<>(map.values());
     }
 
     @Override
     public int size() {
-        return 0;
+        return map.size();
     }
 }
