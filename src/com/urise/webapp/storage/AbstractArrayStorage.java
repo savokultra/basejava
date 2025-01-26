@@ -19,7 +19,7 @@ public abstract class AbstractArrayStorage extends AbstractStorage<Integer> {
 
     @Override
     protected void doUpdate(Resume resume, Integer index) {
-        storage[(Integer) index] = resume;
+        storage[index] = resume;
         System.out.println("Резюме update " + resume + " обновлено");
     }
 
@@ -28,20 +28,20 @@ public abstract class AbstractArrayStorage extends AbstractStorage<Integer> {
         if (countResumes >= STORAGE_LIMIT) {
             throw new StorageException("Storage overflow", resume.getUuid());
         } else {
-            insertElement(resume, (Integer) index);
+            insertElement(resume, index);
             countResumes++;
         }
     }
 
     @Override
     protected Resume doGet(Integer index) {
-        return storage[(Integer) index];
+        return storage[index];
     }
 
     @Override
     public void doDelete(Integer index) {
         countResumes--;
-        fillDeletedElement((Integer) index);
+        fillDeletedElement(index);
         storage[countResumes] = null;
     }
 
@@ -57,7 +57,7 @@ public abstract class AbstractArrayStorage extends AbstractStorage<Integer> {
 
     @Override
     protected boolean isExist(Integer index) {
-        return (Integer) index >= 0;
+        return index >= 0;
     }
 
     protected abstract Integer getSearchKey(String uuid);
