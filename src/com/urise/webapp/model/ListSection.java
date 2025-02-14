@@ -31,6 +31,6 @@ public class ListSection extends Section {
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(items);
+        return items.hashCode();
     }
 }
