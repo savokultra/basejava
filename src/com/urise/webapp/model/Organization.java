@@ -57,7 +57,7 @@ public class Organization {
             this(of(startYear, startMonth), of(endYear, endMonth), title, description);
         }
 
-        public Position(LocalDate of, LocalDate now, String title, String description) {
+        public Position(LocalDate startDate, LocalDate endDate, String title, String description) {
             Objects.requireNonNull(startDate, "startDate must not be null");
             Objects.requireNonNull(endDate, "endDate must not be null");
             Objects.requireNonNull(title, "title must not be null");
