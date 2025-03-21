@@ -6,7 +6,6 @@ public class MainUtil {
 //        System.out.println(Integer.valueOf(-1) == new Integer(-1));
         int result = getInt();
         System.out.println(result);
-
     }
 
     private static Integer getInt() {
