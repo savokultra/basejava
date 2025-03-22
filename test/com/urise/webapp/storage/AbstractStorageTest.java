@@ -14,7 +14,7 @@ import java.util.List;
 import static org.junit.Assert.*;
 
 public abstract class AbstractStorageTest {
-    protected final static File STORAGE_DIR = new File("C:\\Users\\vilyin.SVETOPAPER\\IdeaProjects\\basejava\\Storage");
+    protected static final File STORAGE_DIR = new File("C:\\Users\\vilyin.SVETOPAPER\\IdeaProjects\\basejava\\storage");
 
     protected Storage storage;
 
@@ -83,7 +83,7 @@ public abstract class AbstractStorageTest {
     }
 
     @Test
-    public void update() {
+    public void update() throws Exception {
         Resume resume5 = new Resume(UUID_1, "New Name");
         storage.update(resume5);
         assertTrue(resume5.equals(storage.get(UUID_1)));
