@@ -51,6 +51,7 @@ public class Resume implements Comparable<Resume>, Serializable {
         sections.put(type, section);
     }
 
+//    TODO update equals and hash, add contacts and sections
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
