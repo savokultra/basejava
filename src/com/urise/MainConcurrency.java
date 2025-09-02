@@ -1,6 +1,8 @@
 package com.urise;
 
 import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
 public class MainConcurrency {
@@ -39,17 +41,20 @@ public class MainConcurrency {
 
         final MainConcurrency mainConcurrency = new MainConcurrency();
         CountDownLatch latch = new CountDownLatch(THREADS_NUMBER);
+        ExecutorService executorService = Executors.newCachedThreadPool();
 
 //        List<Thread> treads = new ArrayList<>(THREADS_NUMBER);
 
         for (int i = 0; i < THREADS_NUMBER; i++) {
-            Thread thread = new Thread(() -> {
+            executorService.submit(() ->
+//            Thread thread = new Thread(() ->
+            {
                 for (int j = 0; j < 100; j++) {
                     mainConcurrency.inc();
                 }
                 latch.countDown();
             });
-            thread.start();
+//            thread.start();
 //            treads.add(thread);
         }
 
@@ -64,6 +69,7 @@ public class MainConcurrency {
 */
 
         latch.await(10, TimeUnit.SECONDS);
+        executorService.shutdown();
         System.out.println(mainConcurrency.counter);
 
         final String lock1 = "lock1";
