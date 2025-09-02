@@ -1,7 +1,7 @@
 package com.urise;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.TimeUnit;
 
 public class MainConcurrency {
     public static final int THREADS_NUMBER = 10000;
@@ -15,12 +15,13 @@ public class MainConcurrency {
             @Override
             public void run() {
                 System.out.println(getName() + ", " + getState());
-                throw new IllegalStateException();
+//                throw new IllegalStateException();
             }
         };
         thread0.start();
 
         new Thread(new Runnable() {
+
             @Override
             public void run() {
                 System.out.println(Thread.currentThread().getName() + ", " + Thread.currentThread().getState());
@@ -37,18 +38,22 @@ public class MainConcurrency {
         System.out.println(thread0.getState());
 
         final MainConcurrency mainConcurrency = new MainConcurrency();
-        List<Thread> treads = new ArrayList<>(THREADS_NUMBER);
+        CountDownLatch latch = new CountDownLatch(THREADS_NUMBER);
+
+//        List<Thread> treads = new ArrayList<>(THREADS_NUMBER);
 
         for (int i = 0; i < THREADS_NUMBER; i++) {
             Thread thread = new Thread(() -> {
                 for (int j = 0; j < 100; j++) {
                     mainConcurrency.inc();
                 }
+                latch.countDown();
             });
             thread.start();
-            treads.add(thread);
+//            treads.add(thread);
         }
 
+/*
         treads.forEach(t -> {
             try {
                 t.join();
@@ -56,12 +61,15 @@ public class MainConcurrency {
                 e.printStackTrace();
             }
         });
+*/
+
+        latch.await(10, TimeUnit.SECONDS);
         System.out.println(mainConcurrency.counter);
 
         final String lock1 = "lock1";
         final String lock2 = "lock2";
-        deadLock(lock1, lock2);
-        deadLock(lock2, lock1);
+//        deadLock(lock1, lock2);
+//        deadLock(lock2, lock1);
 
     }
 
