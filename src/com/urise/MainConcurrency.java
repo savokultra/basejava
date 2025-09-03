@@ -1,9 +1,10 @@
 package com.urise;
 
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 public class MainConcurrency {
     public static final int THREADS_NUMBER = 10000;
@@ -12,7 +13,10 @@ public class MainConcurrency {
 
     //    private static final Object LOCK = new Object();
 //    private static final Lock lock = new ReentrantLock();
-    private static final ThreadLocal<SimpleDateFormat> threadLocal = new ThreadLocal<SimpleDateFormat>() {
+    private static final ReentrantReadWriteLock reentrantReadWriteLock = new ReentrantReadWriteLock();
+    private static final Lock WRITE_LOCK = reentrantReadWriteLock.writeLock();
+    private static final Lock READ_LOCK = reentrantReadWriteLock.readLock();
+    private static final ThreadLocal<SimpleDateFormat> threadLocal = new ThreadLocal<>() {
         @Override
         protected SimpleDateFormat initialValue() {
             return new SimpleDateFormat();
@@ -20,12 +24,12 @@ public class MainConcurrency {
     };
 
     public static void main(String[] args) throws InterruptedException {
-        System.out.println(Thread.currentThread().getName());
+        System.out.println("currentThread: " + Thread.currentThread().getName());
 
         Thread thread0 = new Thread() {
             @Override
             public void run() {
-                System.out.println(getName() + ", " + getState());
+                System.out.println("new Thread: " + getName() + ", " + getState());
 //                throw new IllegalStateException();
             }
         };
@@ -35,7 +39,7 @@ public class MainConcurrency {
 
             @Override
             public void run() {
-                System.out.println(Thread.currentThread().getName() + ", " + Thread.currentThread().getState());
+                System.out.println("new Runnable: " + Thread.currentThread().getName() + ", " + Thread.currentThread().getState());
             }
 
             private void inc() {
@@ -43,10 +47,9 @@ public class MainConcurrency {
 //                    counter++;
                 }
             }
-
         }).start();
 
-        System.out.println(thread0.getState());
+        System.out.println("thread0.getState(): " + thread0.getState());
 
         final MainConcurrency mainConcurrency = new MainConcurrency();
         CountDownLatch latch = new CountDownLatch(THREADS_NUMBER);
@@ -61,12 +64,11 @@ public class MainConcurrency {
             {
                 for (int j = 0; j < 100; j++) {
                     mainConcurrency.inc();
-                    System.out.println(threadLocal.get().format(new Date()));
+//                    System.out.println(threadLocal.get().format(new Date()));
                 }
                 latch.countDown();
                 return 5;
             });
-
 //            thread.start();
 //            treads.add(thread);
         }
@@ -84,10 +86,10 @@ public class MainConcurrency {
         latch.await(10, TimeUnit.SECONDS);
         executorService.shutdown();
 //        System.out.println(mainConcurrency.counter);
-        System.out.println(mainConcurrency.atomicCounter.get());
+        System.out.println("atomicCounter.get(): " + mainConcurrency.atomicCounter.get());
 
-        final String lock1 = "lock1";
-        final String lock2 = "lock2";
+//        final String lock1 = "lock1";
+//        final String lock2 = "lock2";
 //        deadLock(lock1, lock2);
 //        deadLock(lock2, lock1);
 
