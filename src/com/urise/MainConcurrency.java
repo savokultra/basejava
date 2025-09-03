@@ -1,14 +1,17 @@
 package com.urise;
 
 import java.util.concurrent.*;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 public class MainConcurrency {
     public static final int THREADS_NUMBER = 10000;
     private int counter;
+    private final AtomicInteger atomicCounter = new AtomicInteger();
+
 //    private static final Object LOCK = new Object();
-    private static final Lock lock = new ReentrantLock();
+//    private static final Lock lock = new ReentrantLock();
 
     public static void main(String[] args) throws InterruptedException {
         System.out.println(Thread.currentThread().getName());
@@ -73,7 +76,8 @@ public class MainConcurrency {
 
         latch.await(10, TimeUnit.SECONDS);
         executorService.shutdown();
-        System.out.println(mainConcurrency.counter);
+//        System.out.println(mainConcurrency.counter);
+        System.out.println(mainConcurrency.atomicCounter.get());
 
         final String lock1 = "lock1";
         final String lock2 = "lock2";
@@ -104,12 +108,13 @@ public class MainConcurrency {
     private void inc() {
 //        synchronized (this) {
 //        synchronized (MainConcurrency.class) {
-        lock.lock();
-        try {
-            counter++;
-        } finally {
-            lock.unlock();
-        }
+//        lock.lock();
+//        try {
+        atomicCounter.incrementAndGet();
+//            counter++;
+//        } finally {
+//            lock.unlock();
+//        }
 //                wait();
 //                readFile
 //                ...
