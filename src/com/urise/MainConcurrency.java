@@ -1,17 +1,23 @@
 package com.urise;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicInteger;
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantLock;
 
 public class MainConcurrency {
     public static final int THREADS_NUMBER = 10000;
     private int counter;
     private final AtomicInteger atomicCounter = new AtomicInteger();
 
-//    private static final Object LOCK = new Object();
+    //    private static final Object LOCK = new Object();
 //    private static final Lock lock = new ReentrantLock();
+    private static final ThreadLocal<SimpleDateFormat> threadLocal = new ThreadLocal<SimpleDateFormat>() {
+        @Override
+        protected SimpleDateFormat initialValue() {
+            return new SimpleDateFormat();
+        }
+    };
 
     public static void main(String[] args) throws InterruptedException {
         System.out.println(Thread.currentThread().getName());
@@ -55,6 +61,7 @@ public class MainConcurrency {
             {
                 for (int j = 0; j < 100; j++) {
                     mainConcurrency.inc();
+                    System.out.println(threadLocal.get().format(new Date()));
                 }
                 latch.countDown();
                 return 5;
