@@ -1,6 +1,7 @@
 package com.urise;
 
 import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
 import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.locks.Lock;
@@ -16,10 +17,10 @@ public class MainConcurrency {
     private static final ReentrantReadWriteLock reentrantReadWriteLock = new ReentrantReadWriteLock();
     private static final Lock WRITE_LOCK = reentrantReadWriteLock.writeLock();
     private static final Lock READ_LOCK = reentrantReadWriteLock.readLock();
-    private static final ThreadLocal<SimpleDateFormat> threadLocal = new ThreadLocal<>() {
+    private static final ThreadLocal<DateTimeFormatter> threadLocal = new ThreadLocal<>() {
         @Override
-        protected SimpleDateFormat initialValue() {
-            return new SimpleDateFormat();
+        protected DateTimeFormatter initialValue() {
+            return DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm:ss");
         }
     };
 
